@@ -142,21 +142,6 @@ MCP_REGISTRY: dict[str, MCPServer] = {
         enabled=False,
         maintained=False,
     ),
-
-    # -------------------------------------------------------------------------
-    # DEPRECATED (archive these)
-    # -------------------------------------------------------------------------
-
-    "fastmcp": MCPServer(
-        name="FastMCP",
-        repo="Activ8-AI/fastmcp",
-        description="[DEPRECATED] MCP framework - use core servers instead",
-        server_type=ServerType.PYTHON,
-        use_cases=[UseCase.DEVELOPMENT],
-        tools_count=0,
-        enabled=False,
-        maintained=False,
-    ),
 }
 
 

@@ -23,36 +23,30 @@ async def test_registry_import():
 async def test_tools_available():
     """Test that tools are registered."""
     from activ8_mcp import mcp
-    from fastmcp import Client
 
-    async with Client(mcp) as client:
-        tools = await client.list_tools()
-        tool_names = [t.name for t in tools]
+    tools = await mcp.list_tools()
+    tool_names = [t.name for t in tools]
 
-        # Check core tools exist
-        assert "get_system_info" in tool_names
-        assert "list_directory" in tool_names
-        assert "git_status" in tool_names
-        assert "http_get" in tool_names
-        assert len(tools) == 21
+    # Check core tools exist
+    assert "get_system_info" in tool_names
+    assert "list_directory" in tool_names
+    assert "git_status" in tool_names
+    assert "http_get" in tool_names
+    assert len(tools) == 21
 
 
 async def test_get_system_info():
     """Test the get_system_info tool."""
     from activ8_mcp import mcp
-    from fastmcp import Client
 
-    async with Client(mcp) as client:
-        result = await client.call_tool("get_system_info", {})
-        # Result contains TextContent with the JSON data
-        assert result is not None
+    result = await mcp.call_tool("get_system_info", {})
+    assert result is not None
+    assert len(result) > 0
 
 
 async def test_calculate():
     """Test the calculate tool."""
     from activ8_mcp import mcp
-    from fastmcp import Client
 
-    async with Client(mcp) as client:
-        result = await client.call_tool("calculate", {"expression": "2 + 2"})
-        assert result is not None
+    result = await mcp.call_tool("calculate", {"expression": "2 + 2"})
+    assert result is not None

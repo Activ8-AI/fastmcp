@@ -20,7 +20,7 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from fastmcp import FastMCP
+from mcp.server import FastMCP
 
 # Create the MCP server
 mcp = FastMCP(

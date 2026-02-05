@@ -55,8 +55,6 @@ def cmd_list(args):
 
 async def test_server_connection(name: str) -> tuple[str, bool, str]:
     """Test connection to a server."""
-    from fastmcp import Client
-
     if name not in MCP_REGISTRY:
         return name, False, f"Unknown server: {name}"
 

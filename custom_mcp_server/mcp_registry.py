@@ -58,7 +58,7 @@ class MCPServerConfig:
     requires_auth: bool = False
 
     def to_client_config(self) -> dict[str, Any]:
-        """Convert to FastMCP Client configuration format."""
+        """Convert to MCP Client configuration format."""
         if self.server_type == ServerType.LOCAL_STDIO:
             return {
                 "command": "python",
@@ -188,19 +188,6 @@ MCP_SERVERS: dict[str, MCPServerConfig] = {
         },
         enabled=False,  # Enable after configuring credentials
     ),
-
-    # -------------------------------------------------------------------------
-    # OFFICIAL FASTMCP DOCS (read-only reference)
-    # -------------------------------------------------------------------------
-
-    "fastmcp_docs": MCPServerConfig(
-        name="FastMCP Docs",
-        description="Search FastMCP documentation",
-        server_type=ServerType.REMOTE_HTTP,
-        use_cases=[UseCase.DOCUMENTATION, UseCase.DEVELOPMENT],
-        http_url="https://gofastmcp.com/mcp",
-        enabled=True,
-    ),
 }
 
 
@@ -219,13 +206,13 @@ def get_enabled_servers() -> dict[str, MCPServerConfig]:
 
 def build_multi_server_config(server_names: list[str] | None = None) -> dict[str, Any]:
     """
-    Build a FastMCP Client multi-server configuration.
+    Build a multi-server configuration for MCP clients.
 
     Args:
         server_names: List of server names to include, or None for all enabled
 
     Returns:
-        Configuration dict for FastMCP Client
+        Configuration dict for MCP clients (Claude Desktop format)
     """
     if server_names is None:
         servers = get_enabled_servers()
@@ -308,9 +295,6 @@ def print_registry():
 GITHUB_SECRETS = [
     "ANTHROPIC_API_KEY",
     "ANTHROPIC_API_KEY_FOR_CI",
-    "FASTMCP_GITHUB_TOKEN",
-    "FASTMCP_TEST_AUTH_GITHUB_CLIENT_ID",
-    "FASTMCP_TEST_AUTH_GITHUB_CLIENT_SECRET",
     "GITHUB_TOKEN",
     "MARVIN_APP_ID",
     "MARVIN_APP_PRIVATE_KEY",

@@ -76,9 +76,6 @@ SECRETS_REGISTRY: dict[str, ServiceSecrets] = {
         service_name="GitHub",
         secrets=[
             SecretDefinition("GITHUB_TOKEN", "Default GitHub token (auto-provided in Actions)"),
-            SecretDefinition("FASTMCP_GITHUB_TOKEN", "FastMCP GitHub token for API access"),
-            SecretDefinition("FASTMCP_TEST_AUTH_GITHUB_CLIENT_ID", "OAuth client ID", required=False),
-            SecretDefinition("FASTMCP_TEST_AUTH_GITHUB_CLIENT_SECRET", "OAuth client secret", required=False),
         ],
     ),
 
@@ -133,9 +130,6 @@ SECRETS_REGISTRY: dict[str, ServiceSecrets] = {
 GITHUB_SECRETS_AVAILABLE = [
     "ANTHROPIC_API_KEY",
     "ANTHROPIC_API_KEY_FOR_CI",
-    "FASTMCP_GITHUB_TOKEN",
-    "FASTMCP_TEST_AUTH_GITHUB_CLIENT_ID",
-    "FASTMCP_TEST_AUTH_GITHUB_CLIENT_SECRET",
     "GITHUB_TOKEN",  # Auto-provided
     "MARVIN_APP_ID",
     "MARVIN_APP_PRIVATE_KEY",
@@ -278,24 +272,19 @@ async def fetch_secrets_from_notion(page_id: str) -> dict[str, str]:
 
     Returns:
         Dict of secret names to values
+
+    Note:
+        This is a placeholder. Implement using the Notion API directly
+        or the notion-mcp-server when needed.
     """
     notion_token = get_secret("NOTION_TOKEN")
     if not notion_token:
         raise ValueError("NOTION_TOKEN required to fetch secrets from Notion")
 
-    # Use the Notion MCP or direct API
-    try:
-        from fastmcp import Client
-
-        async with Client("https://notion-mcp.example.com/mcp") as client:
-            # This assumes a Notion MCP server with a read_page tool
-            result = await client.call_tool("read_page", {"page_id": page_id})
-            # Parse secrets from page content
-            # Implementation depends on how secrets are stored in Notion
-            return {}
-    except Exception as e:
-        print(f"Failed to fetch secrets from Notion: {e}")
-        return {}
+    # TODO: Implement using Notion API directly
+    # See: https://developers.notion.com/reference/intro
+    print(f"fetch_secrets_from_notion: Not implemented (page_id={page_id})")
+    return {}
 
 
 if __name__ == "__main__":
